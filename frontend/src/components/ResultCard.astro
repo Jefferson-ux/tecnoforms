@@ -1,0 +1,127 @@
+---
+const digitos = Array.from({ length: 10 }, (_, i) => i);
+---
+
+<section class="tarjeta">
+      <p id="mensaje">Dibuja un dígito y presiona Predecir.</p>
+
+      <div id="resultado" hidden>
+            <div class="cabecera">
+                  <span id="digito" class="digito"></span>
+                  <div>
+                        <p id="confianza"></p>
+                        <img
+                              id="procesada"
+                              alt="Lo que ve el modelo (28x28)"
+                              width="56"
+                              height="56"
+                        />
+                  </div>
+            </div>
+
+            {
+                  digitos.map((d) => (
+                        <div class="fila">
+                              <span>{d}</span>
+                              <div class="pista">
+                                    <div class="barra" data-d={d} />
+                              </div>
+                              <span class="pct" data-p={d} />
+                        </div>
+                  ))
+            }
+      </div>
+</section>
+
+<script>
+      import type { Prediccion } from "../lib/api";
+
+      const mensaje = document.getElementById("mensaje")!;
+      const resultado = document.getElementById("resultado")!;
+
+      window.addEventListener("resultado", (e) => {
+            const r = (e as CustomEvent<Prediccion>).detail;
+            mensaje.hidden = true;
+            resultado.hidden = false;
+
+            document.getElementById("digito")!.textContent = String(r.digito);
+            document.getElementById("confianza")!.textContent =
+                  `Confianza: ${(r.confianza * 100).toFixed(1)}%`;
+            (document.getElementById("procesada") as HTMLImageElement).src =
+                  r.imagen_procesada;
+
+            r.probabilidades.forEach((p, i) => {
+                  const barra = document.querySelector<HTMLElement>(
+                        `.barra[data-d="${i}"]`,
+                  )!;
+                  barra.style.width = `${p * 100}%`;
+                  barra.classList.toggle("ganador", i === r.digito);
+                  document.querySelector(`.pct[data-p="${i}"]`)!.textContent =
+                        `${(p * 100).toFixed(1)}%`;
+            });
+      });
+
+      window.addEventListener("error-prediccion", (e) => {
+            resultado.hidden = true;
+            mensaje.hidden = false;
+            mensaje.textContent = (e as CustomEvent<string>).detail;
+      });
+
+      window.addEventListener("limpiar", () => {
+            resultado.hidden = true;
+            mensaje.hidden = false;
+            mensaje.textContent = "Dibuja un dígito y presiona Predecir.";
+      });
+</script>
+
+<style>
+      .tarjeta {
+            flex: 1;
+            min-width: 260px;
+            padding: 1rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.06);
+      }
+      .cabecera {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+      }
+      .digito {
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1;
+      }
+      img {
+            image-rendering: pixelated;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .fila {
+            display: grid;
+            grid-template-columns: 1rem 1fr 3.5rem;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.2rem 0;
+      }
+      .pista {
+            height: 10px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+      }
+      .barra {
+            height: 100%;
+            width: 0;
+            background: rgba(255, 255, 255, 0.4);
+            transition: width 0.3s;
+      }
+      .barra.ganador {
+            background: var(--acento);
+      }
+      .pct {
+            font-size: 0.8rem;
+            text-align: right;
+            opacity: 0.8;
+      }
+</style>

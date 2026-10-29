@@ -1,0 +1,38 @@
+---
+import Layout from "../layouts/Layout.astro";
+import DigitCanvas from "../components/DigitCanvas.astro";
+import ResultCard from "../components/ResultCard.astro";
+---
+
+<Layout titulo="Demo | TecnoForms">
+      <main>
+            <h1>Prueba el modelo</h1>
+            <p>Dibuja un dígito del 0 al 9, grande y centrado.</p>
+            <div class="demo">
+                  <DigitCanvas />
+                  <ResultCard />
+            </div>
+      </main>
+</Layout>
+
+<style>
+      main {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 0rem 3rem;
+            color: #e8ecf5;
+      }
+
+      p {
+            color: #9aa4bf;
+            margin: 0 0 2rem;
+      }
+
+      .demo {
+            display: flex;
+            gap: 5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+      }
+</style>

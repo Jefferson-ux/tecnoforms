@@ -1,0 +1,96 @@
+---
+import "../styles/global.css";
+const { titulo = "TecnoForms" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+      <head>
+            <meta charset="utf-8" />
+            <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+            <link rel="icon" href="/favicon.ico" />
+            <meta
+                  name="viewport"
+                  content="width=device-width, initial-scale=1"
+            />
+            <meta name="generator" content={Astro.generator} />
+            <title>{titulo}</title>
+      </head>
+      <body>
+            <nav class="main-nav-bar">
+                  <a href="/" class="brand">
+                        <span class="brand-mark">T</span>
+                        <span class="brand-name"
+                              >Tecno<strong>Forms</strong></span
+                        >
+                  </a>
+
+            </nav>
+            <slot />
+      </body>
+</html>
+
+<style>
+      .main-nav-bar {
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 1.5rem 4.2rem;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0b1020;
+            box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.35);
+      }
+      h1 {
+            padding: 0;
+      }
+      .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: #fff;
+            font-size: 1.2rem;
+            text-decoration: none;
+      }
+
+      .brand-mark {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: 9px;
+            font-weight: 800;
+            color: #0b1020;
+            background: linear-gradient(135deg, #22d3ee, #6366f1);
+      }
+
+      .brand-name strong {
+            color: #22d3ee;
+      }
+
+      .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+      }
+
+      .nav-links a {
+            display: block;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            color: #cbd5e1;
+            text-decoration: none;
+            transition:
+                  background 0.2s,
+                  color 0.2s;
+      }
+
+      .nav-links a:hover {
+            background: rgba(34, 211, 238, 0.15);
+            color: #22d3ee;
+      }
+</style>

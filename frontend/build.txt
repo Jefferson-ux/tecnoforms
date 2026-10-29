@@ -1,0 +1,38 @@
+frontend/
+├── public/
+│   └── favicon.svg               ← (Astro)
+├── src/
+│   ├── layouts/
+│   │   └── Layout.astro          ← NUEVO: HTML base y menú común
+│   ├── pages/
+│   │   ├── index.astro           ← (Astro) landing: qué es el proyecto
+│   │   ├── demo.astro            ← NUEVO: la página con el canvas
+│   │   └── dashboard.astro     ← NUEVO, para después: métricas y comparación
+│   │
+│   ├── components/
+│   │   ├── DigitCanvas.astro     ← NUEVO: canvas para dibujar + botones
+│   │   └── ResultCard.astro      ← NUEVO: dígito, confianza y barras
+│   │
+│   ├── lib/
+│   │   └── api.ts                ← NUEVO: la llamada a FastAPI
+│   │
+│   └── styles/
+│       └── global.css            ← NUEVO: estilos globales
+│
+├── .env                          ← NUEVO: PUBLIC_API_URL=http://127.0.0.1:8000
+├── astro.config.mjs              ← (Astro)
+├── package.json                  ← (Astro)
+└── tsconfig.json                 ← (Astro)
+
+// SHELL -> pnpm create astro@latest frontend
+
+
+
+src/
+├── components/
+│   ├── DigitCanvas.astro   ← HTML, estilos y un script corto que conecta las piezas
+│   ├── canvas.ts           ← solo dibujar, limpiar y exportar la imagen
+│   ├── prediccion.ts       ← pedir la predicción y avisar el resultado
+│   └── ResultCard.astro    ← sin cambios
+└── lib/
+    └── api.ts              ← solo hablar con FastAPI (sin cambios)

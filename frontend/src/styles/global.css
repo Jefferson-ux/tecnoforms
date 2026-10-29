@@ -1,0 +1,109 @@
+:root {
+  --fondo: #0f1115;
+  --texto: #e8e8e8;
+  --acento: #4c72b0;
+}
+
+* { box-sizing: border-box; }
+
+div, body,html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: none;
+    display: block;
+    font-family: system-ui, sans-serif;
+}
+
+body {
+    background: var(--fondo);
+    color: var(--texto);
+}
+
+.main-nav-bar {
+    background-color: steelblue;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  width: 60%;
+  max-width: 150px;
+  justify-content: space-between;
+}
+
+/* From Uiverse.io by ShadowShahriar */
+.button {
+ --border-radius: 50px;
+ --border-width: 10px;
+ appearance: none;
+ position: relative;
+ padding: 1.5em 2.5em;
+ cursor: pointer;
+ border: 0;
+ background-color: #212121;
+ font-family: "Roboto", Arial, "Segoe UI", sans-serif;
+ font-size: 14px;
+ border-radius: 250px;
+ color: #fff;
+ z-index: 2;
+
+}
+
+.button::after {
+ --m-i: linear-gradient(#000, #000);
+ --m-o: content-box, padding-box;
+ content: "";
+ position: absolute;
+ left: 0;
+ top: 0;
+ width: 100%;
+ height: 100%;
+ padding: var(--border-width);
+ border-radius: var(--border-radius);
+ background-image: conic-gradient(
+		#488cfb,
+		#29dbbc,
+		#ddf505,
+		#ff9f0e,
+		#e440bb,
+		#655adc,
+		#488cfb
+	);
+ -webkit-mask-image: var(--m-i), var(--m-i);
+ mask-image: var(--m-i), var(--m-i);
+ -webkit-mask-origin: var(--m-o);
+ mask-origin: var(--m-o);
+ -webkit-mask-clip: var(--m-o);
+ mask-composite: exclude;
+ -webkit-mask-composite: destination-out;
+ filter: hue-rotate(0);
+ animation: rotate-hue linear 500ms infinite;
+ animation-play-state: paused;
+}
+
+.button:hover::after {
+ animation-play-state: running;
+}
+
+@keyframes rotate-hue {
+ to {
+  filter: hue-rotate(1turn);
+ }
+}
+
+.button,
+.button::after {
+ box-sizing: border-box;
+}
+
+.button:active {
+ --border-width: 8px;
+  background-color: #1201;
+}
