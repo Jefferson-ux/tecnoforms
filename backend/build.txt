@@ -1,0 +1,17 @@
+backend/
+├── app/
+│   ├── main.py            ← crea la app, CORS, carga el modelo al arrancar
+│   ├── config.py          ← rutas y variables de entorno
+│   ├── schemas.py         ← formato de las respuestas (Pydantic)
+│   ├── preprocessing.py   ← imagen real → 28x28 estilo MNIST
+│   ├── models.py          ← carga la CNN y predice
+│   └── routers/
+│       ├── predict.py     ← POST /predict
+│       └── history.py     ← GET /historial, PATCH corrección
+│
+├── modelos/               ← aquí va cnn_digitos.keras
+├── requirements.txt
+├── .env.example
+└── .gitignore
+
+// Shell -> uvicorn app.main:app --reload
